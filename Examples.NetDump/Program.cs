@@ -4,7 +4,7 @@ using System.Runtime.InteropServices;
 
 namespace Examples.NetDump
 {
-    class Program
+    unsafe class Program
     {
         private static bool _running = true;
 
@@ -40,12 +40,14 @@ namespace Examples.NetDump
 
                 // loop
                 while (_running)
-                {
                     pid = 0;
-                    receiveLength = 0;
-                    sendLength = 0;
+                receiveLength = 0;
+                sendLength = 0;
 
-                   
+                fixed (byte* data = buffer)
+                {
+                    Diversion.WinDivertHelperParsePacket(data, receiveLength, ipHeader, ipv6Header, icmpHeader,
+                        icmpv6Header, tcpHeader, udpHeader, null, null);
                 }
             }
         }

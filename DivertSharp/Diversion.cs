@@ -21,15 +21,15 @@ namespace DivertSharp
 
         [DllImport("WinDivert.dll", EntryPoint = "WinDivertRecvEx")]
         [return: MarshalAs(UnmanagedType.Bool)]
-        public static extern bool WinDivertRecvEx([In] WinDivertSafeHandle handle, byte[] pPacket, uint packetLen, ulong flags, IntPtr pAddr, IntPtr readLen, IntPtr lpOverlapped);
+        public static extern bool WinDivertRecvEx([In] WinDivertSafeHandle handle, byte[] pPacket, uint packetLen, ulong flags, ref Address pAddr, uint readLen, IntPtr lpOverlapped);
 
         [DllImport("WinDivert.dll", EntryPoint = "WinDivertSend")]
         [return: MarshalAs(UnmanagedType.Bool)]
-        public static extern bool WinDivertSend([In] WinDivertSafeHandle handle, [In] byte[] pPacket, uint packetLen, [In] ref Address pAddr, IntPtr writeLen);
+        public static extern bool WinDivertSend([In] WinDivertSafeHandle handle, [In] byte[] pPacket, uint packetLen, [In] ref Address pAddr, ref uint writeLen);
 
         [DllImport("WinDivert.dll", EntryPoint = "WinDivertSendEx")]
         [return: MarshalAs(UnmanagedType.Bool)]
-        public static extern bool WinDivertSendEx([In] WinDivertSafeHandle handle, [In] byte[] pPacket, uint packetLen, ulong flags, [In] ref Address pAddr, IntPtr writeLen, IntPtr lpOverlapped);
+        public static extern bool WinDivertSendEx([In] WinDivertSafeHandle handle, [In] byte[] pPacket, uint packetLen, ulong flags, [In] ref Address pAddr, uint writeLen, IntPtr lpOverlapped);
 
         [DllImport("WinDivert.dll", EntryPoint = "WinDivertSetParam")]
         [return: MarshalAs(UnmanagedType.Bool)]
@@ -46,11 +46,11 @@ namespace DivertSharp
 
         [DllImport("WinDivert.dll", EntryPoint = "WinDivertHelperParseIPv4Address")]
         [return: MarshalAs(UnmanagedType.Bool)]
-        public static extern bool WinDivertHelperParseIPv4Address([In] [MarshalAs(UnmanagedType.LPStr)] string addrStr, IntPtr pAddr);
+        public static extern bool WinDivertHelperParseIPv4Address([In] [MarshalAs(UnmanagedType.LPStr)] string addrStr, uint pAddr);
 
         [DllImport("WinDivert.dll", EntryPoint = "WinDivertHelperParseIPv6Address")]
         [return: MarshalAs(UnmanagedType.Bool)]
-        public static extern bool WinDivertHelperParseIPv6Address([In] [MarshalAs(UnmanagedType.LPStr)] string addrStr, IntPtr pAddr);
+        public static extern bool WinDivertHelperParseIPv6Address([In] [MarshalAs(UnmanagedType.LPStr)] string addrStr, uint pAddr);
 
         [DllImport("WinDivert.dll", EntryPoint = "WinDivertHelperCalcChecksums")]
         public static extern uint WinDivertHelperCalcChecksums(byte[] pPacket, uint packetLen, ulong flags);
